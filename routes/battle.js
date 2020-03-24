@@ -15,4 +15,13 @@ router.get('/list', function (req, res) {
     })
 })
 
+router.get('/count', function (req, res) {
+    Battle.find(function (err, docs) {
+        if (err) res.json(err)
+        else {
+            res.json(docs.length)
+        }
+    })
+})
+
 module.exports = router;
