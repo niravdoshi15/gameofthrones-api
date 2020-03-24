@@ -8,7 +8,8 @@ router.get('/list', function (req, res) {
     Battle.find(function (err, docs) {
         if (err) res.json(err)
         else {
-            var list = doc.filter((b)=>b.name)            
+            var list = []
+            docs.map(b => list.push(b.name))          
             res.json(list)
         }
     })
