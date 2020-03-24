@@ -4,6 +4,8 @@ var mongoose=require('mongoose');
 
 var path=require('path');
 
+require('dotenv').config()
+
 var app=express();
 
 var taskRoutes=require('./routes/battle');
@@ -11,7 +13,7 @@ var taskRoutes=require('./routes/battle');
 var bodyParser=require('body-parser');
 
 
-mongoose.connect('mongodb://localhost:27017/gameofthrones',{useMongoClient:true});
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gameofthrones',{useMongoClient:true});
 
 
 mongoose.connection.on("connected",()=>{
@@ -40,7 +42,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 
-app.set('port',3030);
+app.set('port',process.env.PORT || 3030);
 
 app.use('/api',taskRoutes);
 
