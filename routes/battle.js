@@ -40,7 +40,7 @@ router.get('/count', function (req, res) {
 
 router.get('/search', async function (req, res) {
     var result = []
-    if(req.quest.battle){
+    if(req.query.battle){
         await Battle.find({ 'name': req.query.battle }, function (err, docs) {
             if (err) res.json(err)
             else {
