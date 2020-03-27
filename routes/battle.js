@@ -9,7 +9,7 @@ router.get('/list', function (req, res) {
         if (err) res.json(err)
         else {
             var list = []
-            docs.map(b => list.push(b.name))
+            docs.map(b => list.push(b.location))
             res.json(list)
         }
     })
