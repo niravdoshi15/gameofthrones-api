@@ -48,6 +48,14 @@ router.get('/search', async function (req, res) {
             }
         })
     }
+    else if (req.query.location && !req.query.type) {
+        await Battle.find({ 'location': req.query.location }, function (err, docs) {
+            if (err) res.json(err)
+            else {
+                result.push(...docs)
+            }
+        })
+    }
     else if (req.query.king) {
         await Battle.find({ $or: [{ 'attacker_king': req.query.king }, { 'defender_king': req.query.king }] }, function (err, docs) {
             if (err) res.json(err)
