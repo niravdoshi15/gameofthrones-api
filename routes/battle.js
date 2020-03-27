@@ -15,6 +15,17 @@ router.get('/list', function (req, res) {
     })
 })
 
+router.get('/battles', function (req, res) {
+    Battle.find(function (err, docs) {
+        if (err) res.json(err)
+        else {
+            var list = []
+            docs.map(b => list.push(b.name))
+            res.json(list)
+        }
+    })
+})
+
 router.get('/count', function (req, res) {
     Battle.find(function (err, docs) {
         if (err) res.json(err)
