@@ -40,7 +40,15 @@ router.get('/count', function (req, res) {
 
 router.get('/search', async function (req, res) {
     var result = []
-    if (req.query.location && req.query.type) {
+    if(req.quest.battle){
+        await Battle.find({ 'name': req.query.battle }, function (err, docs) {
+            if (err) res.json(err)
+            else {
+                result.push(...docs)
+            }
+        })
+    }
+    else if (req.query.location && req.query.type) {
         await Battle.find({ $and: [{ $or: [{ 'attacker_king': req.query.king }, { 'defender_king': req.query.king }] }, { 'location': req.query.location || '' }, { 'battle_type': req.query.type || '' }] }, function (err, docs) {
             if (err) res.json(err)
             else {
